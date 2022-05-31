@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Create new Invoice</h1>
+    <h1>Create new Payment</h1>
 </body>
 </html>
