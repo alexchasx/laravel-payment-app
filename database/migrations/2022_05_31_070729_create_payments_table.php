@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->string('code')->unique();
             $table->integer('amount');
             $table->string('currency');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('name');
             $table->string('description');
             $table->string('message')->nullable();

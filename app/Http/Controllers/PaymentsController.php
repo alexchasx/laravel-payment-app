@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use App\Payments\FakePaymentCodeGenerator;
+use App\Payments\PaymentCodeGenerator;
 use Illuminate\Http\Request;
 
 class PaymentsController extends Controller
@@ -19,13 +21,14 @@ class PaymentsController extends Controller
             'amount' => 'required|integer|min:1',
         ]);
 
-        $request->user()->payments()->create([
+        $payment = $request->user()->payments()->create([
             'amount' => $request->amount,
             'currency' => $request->currency,
             'email' => $request->email,
             'name' => $request->name,
             'description' => $request->description,
             'message' => $request->message,
+            'code' => app(PaymentCodeGenerator::class)->generate(),
         ]);
     }
 }

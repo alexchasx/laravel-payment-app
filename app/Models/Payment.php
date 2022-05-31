@@ -9,14 +9,16 @@ class Payment extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'email',
-        'amount',
-        'currency',
-        'description',
-        'message',
-    ];
+    // protected $fillable = [
+    //     'name',
+    //     'email',
+    //     'amount',
+    //     'currency',
+    //     'description',
+    //     'message',
+    //     'code',
+    // ];
+    protected $guarded = []; // при этом нельзя не использовать $request::all()
 
     protected $dates = [
         'created_at',

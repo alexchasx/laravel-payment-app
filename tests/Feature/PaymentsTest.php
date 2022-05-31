@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\Payment;
 use App\Models\User;
+use App\Payments\FakePaymentCodeGenerator;
+use App\Payments\PaymentCodeGenerator;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -75,6 +77,9 @@ class PaymentsTest extends TestCase
 
         $user = User::factory()->create();
 
+        $fakePaymentCodeGenerator = new FakePaymentCodeGenerator();
+        $this->app->instance(PaymentCodeGenerator::class, $fakePaymentCodeGenerator);
+
         $response = $this->actingAs($user)  // указ. текущ. аутентиф-го польз-ля
             ->json('post', 'payments', [
                 'email' => 'bradle@cooper.com',
@@ -96,6 +101,7 @@ class PaymentsTest extends TestCase
             $this->assertEquals('Boby Baskov', $payment->name);
             $this->assertEquals('Many description', $payment->description);
             $this->assertEquals('Many go go', $payment->message);
+            $this->assertEquals('TESTCODEJSAUA2341', $payment->code);
         });
     }
 
