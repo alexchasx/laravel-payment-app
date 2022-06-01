@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentsController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [DashboardController::class, 'index'])
+    ->name('dashboard')->middleware('auth');
 
 Route::get('payments/new', [PaymentsController::class, 'create'])
     ->name('payments.create')->middleware('auth');

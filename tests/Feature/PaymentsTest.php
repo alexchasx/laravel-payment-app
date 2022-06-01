@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Payment;
+use App\Models\PaymentStatus;
 use App\Models\User;
 use App\Payments\FakePaymentCodeGenerator;
 use App\Payments\PaymentCodeGenerator;
@@ -102,6 +103,7 @@ class PaymentsTest extends TestCase
             $this->assertEquals('Many description', $payment->description);
             $this->assertEquals('Many go go', $payment->message);
             $this->assertEquals('TESTCODEJSAUA2341', $payment->code);
+            $this->assertEquals(PaymentStatus::NEW, $payment->status_id);
         });
     }
 

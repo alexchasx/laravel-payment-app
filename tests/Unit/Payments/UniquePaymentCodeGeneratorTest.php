@@ -20,7 +20,7 @@ class UniquePaymentCodeGeneratorTest extends TestCase
         $generator = new UniquePaymentCodeGenerator;
         $code = $generator->generate();
 
-        $this->assertMatchesRegularExpression('/^[A-Z0-9]*$/', $code);
+        $this->assertMatchesRegularExpression('/^[A-Z0-9]+$/', $code);
     }
 
     public function test_code_must_be_unique()
